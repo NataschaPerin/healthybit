@@ -3,6 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:healthybit/screens/Informations.dart';
+import 'package:healthybit/screens/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,9 +58,10 @@ class HomePage extends StatelessWidget {
             trailing: const Icon(Icons.info_outline_rounded),
           ),
           const Divider(thickness: 2),
-          const ListTile(
+          ListTile(
             title: Text('Log Out'),
             trailing: Icon(Icons.logout),
+            onTap: () => _toLoginPage(context),
           ),
           const Divider(thickness: 2),
         ],
@@ -66,4 +69,14 @@ class HomePage extends StatelessWidget {
     );
   } //build
 
+  void _toLoginPage(BuildContext context) async {
+    //Unset the 'username' filed in SharedPreference
+    final sp = await SharedPreferences.getInstance();
+    sp.remove('username');
+
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.of(context).pushReplacementNamed(LoginPage.route);
+  } //_toCalendarPage
 } //HomePage
