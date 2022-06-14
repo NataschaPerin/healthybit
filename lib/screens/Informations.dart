@@ -13,7 +13,7 @@ class InformationsPage extends StatelessWidget {
     print('${InformationsPage.routename} built');
     return Scaffold(
         appBar: AppBar(
-          title: Text(InformationsPage.routename),
+          title: const Text(InformationsPage.routename),
         ),
         body: GridView.count(
           primary: false,
@@ -25,18 +25,18 @@ class InformationsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               color: Colors.teal[100],
-              child: Align(
+              child: const Align(
                 alignment: Alignment.center,
-                child: const Text(
+                child: Text(
                     "Why is it suggested to sleep from 7 to 9 hours per night?"),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(8),
               color: Colors.teal[200],
-              child: Align(
+              child: const Align(
                 alignment: Alignment.center,
-                child: const Text('Heed not the rabble'),
+                child: Text('Heed not the rabble'),
               ),
             ),
             Container(

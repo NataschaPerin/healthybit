@@ -15,12 +15,12 @@ class HomePage extends StatelessWidget {
     print('${HomePage.routename} built');
     return Scaffold(
       appBar: AppBar(
-        title: Text(HomePage.routename),
+        title: const Text(HomePage.routename),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text('Name:'),
             Text('Surname:'),
             Text('Age:'),
@@ -31,36 +31,36 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
           child: ListView(
         children: <Widget>[
-          new UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Giulio'),
             accountEmail: Text('Inserire mail'),
-            currentAccountPicture: new CircleAvatar(
-              backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: NetworkImage('http://i.pravatar.cc/300'),
             ),
           ),
-          ListTile(
+          const ListTile(
             title: Text('Objectives'),
             trailing: Icon(Icons.fitness_center),
           ),
-          Divider(thickness: 2),
-          ListTile(
+          const Divider(thickness: 2),
+          const ListTile(
             title: Text('Calories Managment'),
             trailing: Icon(Icons.balance_outlined),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           ListTile(
-            title: Text('Informations'),
+            title: const Text('Informations'),
             onTap: () {
               Navigator.pushNamed(context, InformationsPage.route);
             },
-            trailing: Icon(Icons.info_outline_rounded),
+            trailing: const Icon(Icons.info_outline_rounded),
           ),
-          Divider(thickness: 2),
-          ListTile(
+          const Divider(thickness: 2),
+          const ListTile(
             title: Text('Log Out'),
             trailing: Icon(Icons.logout),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
         ],
       )),
     );

@@ -16,12 +16,12 @@ class ObjectiveListPage extends StatelessWidget {
     print('${ObjectiveListPage.routename} built');
     return Scaffold(
       appBar: AppBar(
-        title: Text(ObjectiveListPage.routename),
+        title: const Text(ObjectiveListPage.routename),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text('Sleep Time:'),
             Text('Step Counter:'),
           ],
