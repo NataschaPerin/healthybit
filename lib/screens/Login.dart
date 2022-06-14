@@ -1,5 +1,6 @@
 // pagina di Log in e Log out con eventuale opzione in caso di nuovo utente
 import 'package:flutter/material.dart';
+import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/homepage.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if (sp.getString('username') != null) {
       //If 'username is set, push the HomePage
-      _toHomePage(context);
+      _toFitbitPage(context);
     } //if
   } //_checkLogin
 
@@ -61,13 +62,13 @@ class _LoginPageState extends State<LoginPage> {
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () async {
-        _toHomePage(context);
+        _toFitbitPage(context);
       },
     );
   } // build
 
-  void _toHomePage(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(HomePage.route);
-  } //_toHomePage
+  void _toFitbitPage(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(Fitbit.route);
+  } //_toFitPage
 
 } // LoginScreen

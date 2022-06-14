@@ -59,10 +59,9 @@ class HomePage extends StatelessWidget {
           ),
           const Divider(thickness: 2),
           ListTile(
-            title: Text('Log Out'),
-            trailing: Icon(Icons.logout),
-            onTap: () => _toLoginPage(context),
-          ),
+              title: Text('Log Out'),
+              trailing: Icon(Icons.logout),
+              onTap: () => _toLoginPage(context)),
           const Divider(thickness: 2),
         ],
       )),
@@ -73,10 +72,9 @@ class HomePage extends StatelessWidget {
     //Unset the 'username' filed in SharedPreference
     final sp = await SharedPreferences.getInstance();
     sp.remove('username');
-
     //Pop the drawer first
     Navigator.pop(context);
     //Then pop the HomePage
     Navigator.of(context).pushReplacementNamed(LoginPage.route);
-  } //_toCalendarPage
-} //HomePage
+  }
+}
