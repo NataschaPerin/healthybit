@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:healthybit/informations/eating.dart';
-import 'package:healthybit/informations/overweight.dart';
-import 'package:healthybit/informations/sleep.dart';
-import 'package:healthybit/informations/training.dart';
+import 'package:healthybit/informations/fiber.dart';
+import 'package:healthybit/informations/protein.dart';
+import 'package:healthybit/informations/carbohydrates.dart';
+import 'package:healthybit/informations/lipid.dart';
+import 'package:healthybit/informations/vitaminsminerals.dart';
+import 'package:healthybit/informations/waterconsumption.dart';
+import 'package:healthybit/screens/BMI.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/ObjectivesList.dart';
@@ -10,6 +13,7 @@ import 'package:healthybit/screens/TrophiesPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/homepage.dart';
+import 'package:healthybit/screens/score.dart';
 import 'package:healthybit/screens/settings.dart';
 
 void main() {
@@ -36,12 +40,15 @@ class MyApp extends StatelessWidget {
         // '/LogOut/': (context) => LogOutPage(),
         // '/ChallengesIndication/': (context) => ChallengesIndicationPage(),
         TrophiesPage.route: (context) => TrophiesPage(),
-        EatingPage.route: (context) => EatingPage(),
-        OverweightPage.route: (context) => OverweightPage(),
-        SleepPage.route: (context) => SleepPage(),
-        TrainingPage.route: (context) => TrainingPage(),
+        ProteinPage.route: (context) => ProteinPage(),
+        CarbohydratesPage.route: (context) => CarbohydratesPage(),
+        LipidPage.route: (context) => LipidPage(),
+        FiberPage.route: (context) => FiberPage(),
+        VitaminsMineralsPage.route: (context) => VitaminsMineralsPage(),
+        WaterConsumptionPage.route: (context) => WaterConsumptionPage(),
         EditProfilePage.route: (context) => EditProfilePage(),
         SettingsPage.route: (context) => SettingsPage(),
+        BMIPage.route: (context) => BMIPage(),
       },
     );
   } //build

@@ -2,6 +2,7 @@
 // viene inoltre indicato il BMI con barra orizzontale
 
 import 'package:flutter/material.dart';
+import 'package:healthybit/screens/BMI.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/TrophiesPage.dart';
@@ -37,8 +38,8 @@ class HomePage extends StatelessWidget {
           child: ListView(
         children: <Widget>[
           const UserAccountsDrawerHeader(
-            accountName: Text('Giulio'),
-            accountEmail: Text('Inserire mail'),
+            accountName: Text('Giacomo Cappon'),
+            accountEmail: Text('healthybit@gmail.com'),
             currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage('http://i.pravatar.cc/300'),
             ),
@@ -51,6 +52,21 @@ class HomePage extends StatelessWidget {
           const ListTile(
             title: Text('Calories Managment'),
             trailing: Icon(Icons.balance_outlined),
+          ),
+          ListTile(
+            title: Text('BMI calculator'),
+            trailing: Icon(Icons.calculate),
+            onTap: () {
+              Navigator.pushNamed(context, BMIPage.route);
+            },
+          ),
+          const Divider(thickness: 2),
+          ListTile(
+            title: const Text('Informations'),
+            onTap: () {
+              Navigator.pushNamed(context, InformationsPage.route);
+            },
+            trailing: const Icon(Icons.info_outline_rounded),
           ),
           const Divider(thickness: 2),
           ListTile(
@@ -75,14 +91,6 @@ class HomePage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, TrophiesPage.route);
             },
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-            title: const Text('Informations'),
-            onTap: () {
-              Navigator.pushNamed(context, InformationsPage.route);
-            },
-            trailing: const Icon(Icons.info_outline_rounded),
           ),
           const Divider(thickness: 2),
           ListTile(
