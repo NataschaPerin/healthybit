@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 
-class EatingPage extends StatelessWidget {
-  const EatingPage({Key? key}) : super(key: key);
+class ProteinPage extends StatelessWidget {
+  const ProteinPage({Key? key}) : super(key: key);
 
-  static const route = '/Eating/';
-  static const routename = 'EatingPage';
+  static const route = '/Protein/';
+  static const routename = 'ProteinPage';
 
   @override
   Widget build(BuildContext context) {
-    print('${EatingPage.routename} built');
+    print('${ProteinPage.routename} built');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Informations'),
