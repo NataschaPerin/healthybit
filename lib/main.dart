@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:healthybit/informations/eating.dart';
+import 'package:healthybit/informations/overweight.dart';
+import 'package:healthybit/informations/sleep.dart';
+import 'package:healthybit/informations/training.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/ObjectivesList.dart';
+import 'package:healthybit/screens/TrophiesPage.dart';
+import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/homepage.dart';
+import 'package:healthybit/screens/settings.dart';
 
 void main() {
   runApp(const MyApp());

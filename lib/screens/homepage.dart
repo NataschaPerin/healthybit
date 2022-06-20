@@ -4,6 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
+import 'package:healthybit/screens/TrophiesPage.dart';
+import 'package:healthybit/screens/editProfile.dart';
+import 'package:healthybit/screens/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
@@ -48,6 +51,30 @@ class HomePage extends StatelessWidget {
           const ListTile(
             title: Text('Calories Managment'),
             trailing: Icon(Icons.balance_outlined),
+          ),
+          const Divider(thickness: 2),
+          ListTile(
+            title: Text('Edit Profile'),
+            trailing: Icon(Icons.app_registration_outlined),
+            onTap: () {
+              Navigator.pushNamed(context, EditProfilePage.route);
+            },
+          ),
+          const Divider(thickness: 2),
+          ListTile(
+            title: Text('Settings'),
+            trailing: Icon(Icons.settings),
+            onTap: () {
+              Navigator.pushNamed(context, SettingsPage.route);
+            },
+          ),
+          const Divider(thickness: 2),
+          ListTile(
+            title: Text('Trophies'),
+            trailing: Icon(Icons.sports_soccer),
+            onTap: () {
+              Navigator.pushNamed(context, TrophiesPage.route);
+            },
           ),
           const Divider(thickness: 2),
           ListTile(
