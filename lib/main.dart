@@ -28,7 +28,13 @@ class MyApp extends StatelessWidget {
         // '/Metabolic/': (context) => MetabolicPage(),
         // '/LogOut/': (context) => LogOutPage(),
         // '/ChallengesIndication/': (context) => ChallengesIndicationPage(),
-        // TrophiesPage.route: (context) => TrophiesPage(),
+        TrophiesPage.route: (context) => TrophiesPage(),
+        EatingPage.route: (context) => EatingPage(),
+        OverweightPage.route: (context) => OverweightPage(),
+        SleepPage.route: (context) => SleepPage(),
+        TrainingPage.route: (context) => TrainingPage(),
+        EditProfilePage.route: (context) => EditProfilePage(),
+        SettingsPage.route: (context) => SettingsPage(),
       },
     );
   } //build
