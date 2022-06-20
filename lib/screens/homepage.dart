@@ -1,10 +1,15 @@
 // homepage dove saranno presenti tutte le informazioni principali dell'utente
 // viene inoltre indicato il BMI con barra orizzontale
 
+// homepage dove saranno presenti tutte le informazioni principali dell'utente
+// viene inoltre indicato il BMI con barra orizzontale
+
 import 'package:flutter/material.dart';
+import 'package:healthybit/screens/ActivityPage.dart';
+import 'package:healthybit/screens/Calories.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
-import 'package:healthybit/screens/TrophiesPage.dart';
+import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,11 +30,15 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text('Name:'),
             Text('Surname:'),
             Text('Age:'),
             Text('BMI:'),
+            ElevatedButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, CaloriesPage.route),
+                child: Text('Start'))
           ],
         ),
       ),
@@ -43,14 +52,20 @@ class HomePage extends StatelessWidget {
               backgroundImage: NetworkImage('http://i.pravatar.cc/300'),
             ),
           ),
-          const ListTile(
-            title: Text('Objectives'),
-            trailing: Icon(Icons.fitness_center),
+          ListTile(
+            title: Text('Food Diary'),
+            trailing: Icon(Icons.balance_outlined),
+            onTap: () {
+              Navigator.pushNamed(context, CaloriesPage.route);
+            },
           ),
           const Divider(thickness: 2),
-          const ListTile(
-            title: Text('Calories Managment'),
+          ListTile(
+            title: Text('Activity Diary'),
             trailing: Icon(Icons.balance_outlined),
+            onTap: () {
+              Navigator.pushNamed(context, ActivityPage.route);
+            },
           ),
           const Divider(thickness: 2),
           ListTile(
@@ -69,12 +84,9 @@ class HomePage extends StatelessWidget {
             },
           ),
           const Divider(thickness: 2),
-          ListTile(
-            title: Text('Trophies'),
-            trailing: Icon(Icons.sports_soccer),
-            onTap: () {
-              Navigator.pushNamed(context, TrophiesPage.route);
-            },
+          const ListTile(
+            title: Text('FitnessActivity'),
+            trailing: Icon(Icons.fitness_center),
           ),
           const Divider(thickness: 2),
           ListTile(

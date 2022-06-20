@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if (sp.getString('username') != null) {
       //If 'username is set, push the HomePage
-      _toFitbitPage(context);
+      _toHomePage(context);
     } //if
   } //_checkLogin
 
@@ -62,13 +62,13 @@ class _LoginPageState extends State<LoginPage> {
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () async {
-        _toFitbitPage(context);
+        _toHomePage(context);
       },
     );
   } // build
 
-  void _toFitbitPage(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(Fitbit.route);
+  void _toHomePage(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(HomePage.route);
   } //_toFitPage
 
 } // LoginScreen
