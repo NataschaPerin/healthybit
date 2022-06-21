@@ -82,9 +82,10 @@ class _BMIPageState extends State<BMIPage> {
                               context,
                               PageTransition(
                                   child: ScorePage(
-                                    bmiScore: _bmiScore,
-                                    age: _age,
-                                  ),
+                                      bmiScore: _bmiScore,
+                                      age: _age,
+                                      height: _height,
+                                      weight: _weight),
                                   type: PageTransitionType.fade));
 
                           setState(() {

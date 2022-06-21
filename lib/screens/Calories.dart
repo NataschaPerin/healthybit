@@ -38,7 +38,7 @@ class CaloriesPage extends StatelessWidget {
                 final data = snapshot.data as List<Food>;
                 //If the Meal table is empty, show a simple Text, otherwise show the list of meals using a ListView.
                 return data.length == 0
-                    ? Text('The meal list is currently empty')
+                    ? Text('The food list is currently empty')
                     : ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, foodIndex) {

@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:pretty_gauge/pretty_gauge.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:healthybit/database/entities/food.dart';
+import 'package:healthybit/repositories/databaseRepository.dart';
+import 'package:healthybit/widgets/formTiles.dart';
+import 'package:healthybit/widgets/formSeparator.dart';
+import 'package:healthybit/utils/formats.dart';
+import 'package:provider/provider.dart';
+import 'package:healthybit/screens/Results.dart';
 
 class ScorePage extends StatelessWidget {
   final double bmiScore;
 
   final int age;
+
+  final int weight;
+
+  final int height;
 
   String? bmiStatus;
 
@@ -13,7 +24,12 @@ class ScorePage extends StatelessWidget {
 
   Color? bmiStatusColor;
 
-  ScorePage({Key? key, required this.bmiScore, required this.age})
+  ScorePage(
+      {Key? key,
+      required this.bmiScore,
+      required this.age,
+      required this.weight,
+      required this.height})
       : super(key: key);
 
   @override
@@ -91,7 +107,11 @@ class ScorePage extends StatelessWidget {
                             },
                             child: const Text("Share")),
                       ],
-                    )
+                    ),
+                    FloatingActionButton(
+                      child: const Icon(Icons.save_alt),
+                      onPressed: () => _toResultsPage(context, null),
+                    ),
                   ]))),
     );
   }
@@ -115,4 +135,9 @@ class ScorePage extends StatelessWidget {
       bmiStatusColor = Colors.red;
     }
   }
+
+  void _toResultsPage(BuildContext context, Parameter? parameter) {
+    Navigator.pushNamed(context, ResultsPage.route,
+        arguments: {'parameter': Parameter});
+  } //_toResultsPage
 }

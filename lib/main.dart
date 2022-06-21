@@ -11,10 +11,10 @@ import 'package:healthybit/screens/BMIPage.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/MetabolicPage.dart';
+import 'package:healthybit/screens/Results.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/homepage.dart';
-import 'package:healthybit/screens/score.dart';
 import 'package:healthybit/screens/scorepage.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:healthybit/screens/Calories.dart';
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           SettingsPage.route: (context) => SettingsPage(),
           ActivityPage.route: (context) => ActivityPage(),
           BMIPage.route: (context) => BMIPage(),
-          Fitbit.route: (context) => Fitbit(),
+          Fitbit.route: (context) => Fitbit()
         },
         onGenerateRoute: (settings) {
           if (settings.name == CaloriesPage.route) {
@@ -73,6 +73,11 @@ class MyApp extends StatelessWidget {
             final args = settings.arguments as Map;
             return MaterialPageRoute(builder: (context) {
               return MetabolicPage(food: args['food']);
+            });
+          } else if (settings.name == ResultsPage.route) {
+            final args1 = settings.arguments as Map;
+            return MaterialPageRoute(builder: (context) {
+              return ResultsPage(parameter: args1['parameter']);
             });
           } else {
             return null;

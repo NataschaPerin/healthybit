@@ -29,12 +29,32 @@ class DatabaseRepository extends ChangeNotifier {
     notifyListeners();
   } //removeFood
 
-  //This method wraps the updateMeal() method of the DAO.
+  //This method wraps the updateFood() method of the DAO.
   //Then, it notifies the listeners that something changed.
   Future<void> updateFood(Food food) async {
     await database.foodDao.updateFood(food);
     notifyListeners();
-  } //updateMeal
+  } //updateFood
+
+  //This method wraps the findAllParameters() method of the DAO
+  Future<List<Food>> findAllParameters() async {
+    final results = await database.parameterDao.findAllParameters();
+    return results;
+  } //findAllParameters
+
+  //This method wraps the insertParameter() method of the DAO.
+  //Then, it notifies the listeners that something changed.
+  Future<void> insertParameter(Parameter parameter) async {
+    await database.parameterDao.insertParameter(parameter);
+    notifyListeners();
+  } //insertParameter
+
+  //This method wraps the updateParameter() method of the DAO.
+  //Then, it notifies the listeners that something changed.
+  Future<void> updateParameter(Parameter parameter) async {
+    await database.parameterDao.updateParameter(parameter);
+    notifyListeners();
+  } //updateParameter
 
 } //DatabaseRepository
 

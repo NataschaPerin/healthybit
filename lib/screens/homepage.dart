@@ -82,12 +82,10 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
           child: ListView(
         children: <Widget>[
-          const UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             accountName: Text('Giacomo Cappon'),
             accountEmail: Text('healthybit@gmail.com'),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('http://i.pravatar.cc/300'),
-            ),
+            currentAccountPicture: Image.asset('assets/cappon.png'),
           ),
           ListTile(
             title: Text('Food Diary'),

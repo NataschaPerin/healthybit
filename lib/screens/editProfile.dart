@@ -11,6 +11,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +68,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ],
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              fit: BoxFit.cover, image: NetworkImage("")),
+                              image: NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/4463311?v=4'),
+                              fit: BoxFit.cover),
                         ),
                       ),
                       Positioned(

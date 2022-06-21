@@ -63,6 +63,8 @@ class _$AppDatabase extends AppDatabase {
 
   FoodDao? _foodDaoInstance;
 
+  ParameterDao? _parameterDaoInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -83,6 +85,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Food` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `weight` REAL NOT NULL, `carbohydrates` REAL NOT NULL, `proteins` REAL NOT NULL, `lipids` REAL NOT NULL, `calories` REAL NOT NULL, `dateTime` INTEGER NOT NULL)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `Parameter` (`personalId` INTEGER PRIMARY KEY AUTOINCREMENT, `personWeight` REAL NOT NULL, `Height` REAL NOT NULL, `BMI` REAL NOT NULL, `date` REAL NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -93,6 +97,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   FoodDao get foodDao {
     return _foodDaoInstance ??= _$FoodDao(database, changeListener);
+  }
+
+  @override
+  ParameterDao get parameterDao {
+    return _parameterDaoInstance ??= _$ParameterDao(database, changeListener);
   }
 }
 
@@ -180,6 +189,67 @@ class _$FoodDao extends FoodDao {
   @override
   Future<void> deleteFood(Food food) async {
     await _foodDeletionAdapter.delete(food);
+  }
+}
+
+class _$ParameterDao extends ParameterDao {
+  _$ParameterDao(this.database, this.changeListener)
+      : _queryAdapter = QueryAdapter(database),
+        _parameterInsertionAdapter = InsertionAdapter(
+            database,
+            'Parameter',
+            (Parameter item) => <String, Object?>{
+                  'personalId': item.personalId,
+                  'personWeight': item.personWeight,
+                  'Height': item.Height,
+                  'BMI': item.BMI,
+                  'date': item.date
+                }),
+        _parameterUpdateAdapter = UpdateAdapter(
+            database,
+            'Parameter',
+            ['personalId'],
+            (Parameter item) => <String, Object?>{
+                  'personalId': item.personalId,
+                  'personWeight': item.personWeight,
+                  'Height': item.Height,
+                  'BMI': item.BMI,
+                  'date': item.date
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<Parameter> _parameterInsertionAdapter;
+
+  final UpdateAdapter<Parameter> _parameterUpdateAdapter;
+
+  @override
+  Future<List<Food>> findAllParameters() async {
+    return _queryAdapter.queryList('SELECT * FROM Parameter',
+        mapper: (Map<String, Object?> row) => Food(
+            row['id'] as int?,
+            row['name'] as String,
+            row['weight'] as double,
+            row['carbohydrates'] as double,
+            row['proteins'] as double,
+            row['lipids'] as double,
+            row['calories'] as double,
+            _dateTimeConverter.decode(row['dateTime'] as int)));
+  }
+
+  @override
+  Future<void> insertParameter(Parameter parameter) async {
+    await _parameterInsertionAdapter.insert(
+        parameter, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateParameter(Parameter parameter) async {
+    await _parameterUpdateAdapter.update(parameter, OnConflictStrategy.replace);
   }
 }
 

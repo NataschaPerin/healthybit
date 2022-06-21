@@ -1,6 +1,7 @@
 // pagina fatta tipo griglia dove sono contenute tutte le info utili per l'utente
 //
 import 'package:flutter/material.dart';
+import 'package:healthybit/informations/protein.dart';
 
 class InformationsPage extends StatelessWidget {
   const InformationsPage({Key? key}) : super(key: key);
@@ -25,10 +26,14 @@ class InformationsPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[100],
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text("Protein"),
-            ),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, ProteinPage.route);
+                  },
+                  title: Text("Protein"),
+                )),
           ),
           Container(
             padding: const EdgeInsets.all(8),
