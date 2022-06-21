@@ -10,8 +10,6 @@ class Fitbit extends StatelessWidget {
   static const route = '/fitbit/';
   static const routename = 'Fitbit';
 
-  get fitbitAccountDatas => null;
-
   @override
   Widget build(BuildContext context) {
     print('${Fitbit.routename} built');
@@ -32,23 +30,7 @@ class Fitbit extends StatelessWidget {
                     clientSecret: Strings.fitbitClientSecret,
                     redirectUri: Strings.fitbitRedirectUri,
                     callbackUrlScheme: Strings.fitbitCallbackScheme);
-                //Instantiate a roper data manager
-                FitbitActivityTimeseriesDataManager
-                    fitbitActivityTimeseriesDataManager =
-                    FitbitActivityTimeseriesDataManager(
-                  clientID: Strings.fitbitClientID,
-                  clientSecret: Strings.fitbitClientSecret,
-                  type: 'steps',
-                );
-                //Create the request Url
-                final stepsData = await fitbitActivityTimeseriesDataManager
-                    .fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
-                  date: DateTime.now().subtract(Duration(days: 1)),
-                  userID: userId,
-                  resource: fitbitActivityTimeseriesDataManager.type,
-                )) as List<FitbitActivityTimeseriesData>;
-                //Get the data
-                Navigator.pushNamed(context, HomePage.route, arguments: userId);
+                Navigator.pop(context, userId);
               },
               child: Text('Tap to authorize'),
             ),
@@ -61,15 +43,9 @@ class Fitbit extends StatelessWidget {
               },
               child: Text('Tap to unauthorize'),
             ),
-            //ElevatedButton(
-            //onPressed: () => _toHomePage(context), child: Text('to home'))
           ],
         ),
       ),
     );
   } //build
-
-  void _toHomePage(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(HomePage.route);
-  } //_toHomePage
-} //HomePage
+}

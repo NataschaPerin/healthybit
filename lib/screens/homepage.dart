@@ -12,11 +12,14 @@ import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
+import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fitbitter/fitbitter.dart';
+import 'package:healthybit/utils/strings.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   static const route = '/Homepage/';
   static const routename = 'Homepage';
@@ -39,7 +42,40 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
                 onPressed: () =>
                     Navigator.pushNamed(context, CaloriesPage.route),
-                child: Text('Start'))
+                child: Text('Start')),
+            ElevatedButton(
+                child: Text('Authorization'),
+                onPressed: () async {
+                  final userId = await Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Fitbit()));
+                }),
+            ElevatedButton(
+              child: Text('Get the calories'),
+              onPressed: () async {
+                //Instantiate a proper data manager
+                FitbitActivityTimeseriesDataManager
+                    fitbitActivityTimeseriesDataManager =
+                    FitbitActivityTimeseriesDataManager(
+                  clientID: Strings.fitbitClientID,
+                  clientSecret: Strings.fitbitClientSecret,
+                  type: 'steps',
+                );
+
+                //Fetch data
+                final stepsData = await fitbitActivityTimeseriesDataManager
+                    .fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
+                  date: DateTime.now().subtract(Duration(days: 1)),
+                  userID: '7ML2XV',
+                  resource: fitbitActivityTimeseriesDataManager.type,
+                )) as List<FitbitActivityTimeseriesData>;
+
+                // Use them as you want
+                final snackBar = SnackBar(
+                    content: Text(
+                        'Yesterday you walked ${stepsData[0].value} steps!'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
           ],
         ),
       ),

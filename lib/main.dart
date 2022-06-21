@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
           SettingsPage.route: (context) => SettingsPage(),
           ActivityPage.route: (context) => ActivityPage(),
           BMIPage.route: (context) => BMIPage(),
+          Fitbit.route: (context) => Fitbit(),
         },
         onGenerateRoute: (settings) {
           if (settings.name == CaloriesPage.route) {
