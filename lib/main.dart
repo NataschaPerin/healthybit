@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healthybit/database/entities/food.dart';
-import 'package:healthybit/informations/eating.dart';
-import 'package:healthybit/informations/overweight.dart';
-import 'package:healthybit/informations/sleep.dart';
-import 'package:healthybit/informations/training.dart';
+import 'package:healthybit/informations/carbohydrates.dart';
+import 'package:healthybit/informations/fiber.dart';
+import 'package:healthybit/informations/lipid.dart';
+import 'package:healthybit/informations/protein.dart';
+import 'package:healthybit/informations/vitaminsminerals.dart';
+import 'package:healthybit/informations/waterconsumption.dart';
 import 'package:healthybit/screens/ActivityPage.dart';
 import 'package:healthybit/screens/BMIPage.dart';
 import 'package:healthybit/screens/Informations.dart';
@@ -12,6 +14,8 @@ import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/homepage.dart';
+import 'package:healthybit/screens/score.dart';
+import 'package:healthybit/screens/scorepage.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:healthybit/screens/Calories.dart';
 import 'package:healthybit/database/database.dart';
@@ -40,6 +44,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         //This specifies the app entrypoint
         initialRoute: LoginPage.route,
         //This maps names to the set of routes within the app
@@ -47,13 +52,16 @@ class MyApp extends StatelessWidget {
           LoginPage.route: (context) => const LoginPage(),
           HomePage.route: (context) => HomePage(),
           InformationsPage.route: (context) => const InformationsPage(),
-          EatingPage.route: (context) => EatingPage(),
-          OverweightPage.route: (context) => OverweightPage(),
-          SleepPage.route: (context) => SleepPage(),
-          TrainingPage.route: (context) => TrainingPage(),
+          CarbohydratesPage.route: (context) => CarbohydratesPage(),
+          ProteinPage.route: (context) => ProteinPage(),
+          FiberPage.route: (context) => FiberPage(),
+          LipidPage.route: (context) => LipidPage(),
+          VitaminsMineralsPage.route: (context) => VitaminsMineralsPage(),
+          WaterConsumptionPage.route: (context) => WaterConsumptionPage(),
           EditProfilePage.route: (context) => EditProfilePage(),
           SettingsPage.route: (context) => SettingsPage(),
           ActivityPage.route: (context) => ActivityPage(),
+          BMIPage.route: (context) => BMIPage(),
         },
         onGenerateRoute: (settings) {
           if (settings.name == CaloriesPage.route) {
