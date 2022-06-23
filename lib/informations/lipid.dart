@@ -17,7 +17,7 @@ class _LipidPageState extends State<LipidPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 248, 183, 183),
+        backgroundColor: Color.fromARGB(255, 242, 182, 142),
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Column(children: [
@@ -26,6 +26,7 @@ class _LipidPageState extends State<LipidPage> {
               padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
+                  SizedBox(height: 30),
                   Row(
                     children: [
                       _buildCard('assets/burro.jpg'),
@@ -55,7 +56,8 @@ class _LipidPageState extends State<LipidPage> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.red, width: 5.0),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 205, 126, 7), width: 5.0),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     boxShadow: [
                       BoxShadow(
@@ -76,7 +78,8 @@ class _LipidPageState extends State<LipidPage> {
         width: 150,
         decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Colors.red, width: 5.0),
+            border:
+                Border.all(color: Color.fromARGB(255, 205, 126, 7), width: 5.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             boxShadow: [
               BoxShadow(

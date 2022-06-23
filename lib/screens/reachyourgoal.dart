@@ -72,21 +72,21 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
             future: _toConsume(context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                final data = snapshot.data as String;
+                final calories_out = snapshot.data as String;
                 return Card(
                     elevation: 5,
                     child: ListTile(
                         leading: Icon(MdiIcons.fire),
                         title: Text('CALORIES OUTTAKE:'),
-                        subtitle: Text(data + '  kcal')));
+                        subtitle: Text(calories_out + '  kcal')));
               } else {
                 return Text('Control your fitbit authorization');
               }
-            })
+            }),
       ],
     ) //Center
-            )); //Scaffold
-  }
+            ));
+  } //Scaffold
 
   List<double> _toSelect(BuildContext context, List<Food> data) {
     List<double> calories_in = [];
@@ -120,5 +120,18 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
       resource: fitbitActivityTimeseriesDataManager.type,
     )) as List<FitbitActivityTimeseriesData>;
     return caloriesData[0].value.toString();
+  }
+
+  String _toComparation(BuildContext context, sum, calories_out) {
+    double cal_out = double.parse(calories_out);
+    String str = '';
+    if (sum > cal_out) {
+      String str = 'You are in surplus by ${sum - cal_out}!';
+    } else if (sum == cal_out) {
+      String str = 'You are in perfect balance!';
+    } else {
+      String str = 'You are in deficit by ${cal_out - sum}!';
+    }
+    return str;
   }
 }

@@ -17,10 +17,11 @@ class _WaterPageState extends State<WaterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 248, 183, 183),
+        backgroundColor: Color.fromARGB(255, 248, 183, 242),
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Column(children: [
+            SizedBox(height: 30),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.all(15),
@@ -49,7 +50,7 @@ class _WaterPageState extends State<WaterPage> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.red, width: 5.0),
+                    border: Border.all(color: Colors.purple, width: 5.0),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     boxShadow: [
                       BoxShadow(
@@ -70,7 +71,7 @@ class _WaterPageState extends State<WaterPage> {
         width: 150,
         decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Colors.red, width: 5.0),
+            border: Border.all(color: Colors.purple, width: 5.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             boxShadow: [
               BoxShadow(

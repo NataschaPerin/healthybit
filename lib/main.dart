@@ -12,7 +12,6 @@ import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/Results.dart';
 import 'package:healthybit/screens/editProfile.dart';
-import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/fitnessactivity.dart';
 import 'package:healthybit/screens/homepage.dart';
 import 'package:healthybit/screens/scorepage.dart';
@@ -53,7 +52,7 @@ class MyApp extends StatelessWidget {
         routes: {
           LoginPage.route: (context) => const LoginPage(),
           HomePage.route: (context) => HomePage(),
-          InformationsPage.route: (context) => const InformationsPage(),
+          InformationsPage.route: (context) => InformationsPage(),
           CarbohydratesPage.route: (context) => CarbohydratesPage(),
           ProteinPage.route: (context) => ProteinPage(),
           FiberPage.route: (context) => FiberPage(),
@@ -63,7 +62,6 @@ class MyApp extends StatelessWidget {
           EditProfilePage.route: (context) => EditProfilePage(),
           SettingsPage.route: (context) => SettingsPage(),
           BMIPage.route: (context) => BMIPage(),
-          Fitbit.route: (context) => Fitbit(),
           FitnessActivityPage.route: (context) => FitnessActivityPage(),
           ProgressPage.route: (context) => ProgressPage(),
           ReachyourgoalPage.route: (context) => ReachyourgoalPage()

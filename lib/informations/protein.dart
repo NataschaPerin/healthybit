@@ -23,6 +23,7 @@ class _ProteinPageState extends State<ProteinPage> {
         body: Padding(
           padding: EdgeInsets.all(20),
           child: Column(children: [
+            SizedBox(height: 30),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.all(15),

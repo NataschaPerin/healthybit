@@ -10,7 +10,6 @@ import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fitbitter/fitbitter.dart';
-import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/utils/strings.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:healthybit/database/entities/food.dart';
