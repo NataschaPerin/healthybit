@@ -16,6 +16,7 @@ import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/fitnessactivity.dart';
 import 'package:healthybit/screens/homepage.dart';
 import 'package:healthybit/screens/scorepage.dart';
+import 'package:healthybit/screens/reachyourgoal.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:healthybit/screens/Calories.dart';
 import 'package:healthybit/database/database.dart';
@@ -64,7 +65,8 @@ class MyApp extends StatelessWidget {
           BMIPage.route: (context) => BMIPage(),
           Fitbit.route: (context) => Fitbit(),
           FitnessActivityPage.route: (context) => FitnessActivityPage(),
-          ProgressPage.route: (context) => ProgressPage()
+          ProgressPage.route: (context) => ProgressPage(),
+          ReachyourgoalPage.route: (context) => ReachyourgoalPage()
         },
         onGenerateRoute: (settings) {
           if (settings.name == CaloriesPage.route) {

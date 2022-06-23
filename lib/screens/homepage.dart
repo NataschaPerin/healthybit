@@ -12,6 +12,7 @@ import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
+import 'package:healthybit/screens/reachyourgoal.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:healthybit/screens/fitnessactivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,10 +31,11 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
             title: ListTile(
                 title: Center(
-                    child: Text(
-          'HealthyBit',
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        )))),
+          child: Text(
+            'HealthyBit',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ))),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -62,6 +64,11 @@ class HomePage extends StatelessWidget {
                 leading: Icon(Icons.fitbit),
                 title: Text('Activity Diary'),
                 onTap: () => _toActivityDiary(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.emoji_objects),
+                title: Text('Goals'),
+                onTap: () => _toReachYourGoal(context),
               ),
               ListTile(
                 leading: Icon(Icons.info_outline_rounded),
@@ -120,7 +127,28 @@ class HomePage extends StatelessWidget {
                         SizedBox(height: 20),
                       ]),
                     ),
-                  ]))
+                  ])),
+              ElevatedButton(
+                child: Text('Authorize'),
+                onPressed: () async {
+                  // Authorize the app
+                  String? userId = await FitbitConnector.authorize(
+                      context: context,
+                      clientID: Strings.fitbitClientID,
+                      clientSecret: Strings.fitbitClientSecret,
+                      redirectUri: Strings.fitbitRedirectUri,
+                      callbackUrlScheme: Strings.fitbitCallbackScheme);
+                },
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await FitbitConnector.unauthorize(
+                    clientID: Strings.fitbitClientID,
+                    clientSecret: Strings.fitbitClientSecret,
+                  );
+                },
+                child: Text('Tap to unauthorize'),
+              ),
             ])));
   }
 
@@ -150,6 +178,13 @@ class HomePage extends StatelessWidget {
     Navigator.pop(context);
     //Then pop the HomePage
     Navigator.pushNamed(context, FitnessActivityPage.route);
+  } //_toCalendarPage
+
+  void _toReachYourGoal(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.pushNamed(context, ReachyourgoalPage.route);
   } //_toCalendarPage
 
   void _toInformationPage(BuildContext context) {

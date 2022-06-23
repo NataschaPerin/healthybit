@@ -14,7 +14,7 @@ class CaloriesPage extends StatelessWidget {
   static const route = '/CaloriesPage';
   static const routeDisplayName = 'Caloriespage';
 
-  double todaycalories = 0;
+  //double todaycalories = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +45,8 @@ class CaloriesPage extends StatelessWidget {
                       : ListView.builder(
                           itemCount: data.length,
                           itemBuilder: (context, foodIndex) {
-                            todaycalories =
-                                (todaycalories + data[foodIndex].calories);
+                            //todaycalories =
+                            //(todaycalories + data[foodIndex].calories);
                             //print('$todaycalories');
                             //Here, we are using a Card to show a Meal
                             return Card(
