@@ -37,7 +37,7 @@ class DatabaseRepository extends ChangeNotifier {
   } //updateFood
 
   //This method wraps the findAllParameters() method of the DAO
-  Future<List<Food>> findAllParameters() async {
+  Future<List<Parameter>> findAllParameters() async {
     final results = await database.parameterDao.findAllParameters();
     return results;
   } //findAllParameters
@@ -56,5 +56,9 @@ class DatabaseRepository extends ChangeNotifier {
     notifyListeners();
   } //updateParameter
 
+  Future<void> removeParameter(Parameter parameter) async {
+    await database.parameterDao.deleteParameter(parameter);
+    notifyListeners();
+  } //removeFood
 } //DatabaseRepository
 

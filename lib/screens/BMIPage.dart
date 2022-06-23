@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthybit/repositories/databaseRepository.dart';
 import 'dart:math';
 import 'package:healthybit/widget/age_weight_widget.dart';
 import 'package:healthybit/widget/gender_widget.dart';
@@ -6,6 +7,9 @@ import 'package:healthybit/widget/height_widget.dart';
 import 'package:healthybit/screens/scorepage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
+import 'package:healthybit/database/database.dart';
+import 'package:healthybit/database/entities/food.dart';
+import 'package:provider/provider.dart';
 
 class BMIPage extends StatefulWidget {
   const BMIPage({Key? key}) : super(key: key);
@@ -78,6 +82,10 @@ class _BMIPageState extends State<BMIPage> {
                     child: SwipeableButtonView(
                         isFinished: _isFinished,
                         onFinish: () async {
+                          await Provider.of<DatabaseRepository>(context,
+                                  listen: false)
+                              .insertParameter(Parameter(null, _weight, _height,
+                                  _bmiScore, DateTime.now()));
                           await Navigator.push(
                               context,
                               PageTransition(

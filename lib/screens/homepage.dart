@@ -1,11 +1,10 @@
 // homepage dove saranno presenti tutte le informazioni principali dell'utente
 // viene inoltre indicato il BMI con barra orizzontale
 
-// homepage dove saranno presenti tutte le informazioni principali dell'utente
-// viene inoltre indicato il BMI con barra orizzontale
-
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:healthybit/screens/ActivityPage.dart';
+import 'package:flutter/widgets.dart';
 import 'package:healthybit/screens/BMIPage.dart';
 import 'package:healthybit/screens/Calories.dart';
 import 'package:healthybit/screens/Informations.dart';
@@ -14,140 +13,151 @@ import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
 import 'package:healthybit/screens/settings.dart';
+import 'package:healthybit/screens/fitnessactivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fitbitter/fitbitter.dart';
 import 'package:healthybit/utils/strings.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-
+  double value = 0.5;
   static const route = '/Homepage/';
   static const routename = 'Homepage';
 
   @override
   Widget build(BuildContext context) {
-    print('${HomePage.routename} built');
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(HomePage.routename),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Name:'),
-            Text('Surname:'),
-            Text('Age:'),
-            Text('BMI:'),
-            ElevatedButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, CaloriesPage.route),
-                child: Text('Start')),
-            ElevatedButton(
-                child: Text('Authorization'),
-                onPressed: () async {
-                  final userId = await Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Fitbit()));
-                }),
-            ElevatedButton(
-              child: Text('Get the calories'),
-              onPressed: () async {
-                //Instantiate a proper data manager
-                FitbitActivityTimeseriesDataManager
-                    fitbitActivityTimeseriesDataManager =
-                    FitbitActivityTimeseriesDataManager(
-                  clientID: Strings.fitbitClientID,
-                  clientSecret: Strings.fitbitClientSecret,
-                  type: 'steps',
-                );
-
-                //Fetch data
-                final stepsData = await fitbitActivityTimeseriesDataManager
-                    .fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
-                  date: DateTime.now().subtract(Duration(days: 1)),
-                  userID: '7ML2XV',
-                  resource: fitbitActivityTimeseriesDataManager.type,
-                )) as List<FitbitActivityTimeseriesData>;
-
-                // Use them as you want
-                final snackBar = SnackBar(
-                    content: Text(
-                        'Yesterday you walked ${stepsData[0].value} steps!'));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-            ),
-          ],
-        ),
-      ),
-      drawer: Drawer(
+        appBar: AppBar(
+            title: ListTile(
+                title: Center(
+                    child: Text(
+          'HealthyBit',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        )))),
+        drawer: Drawer(
           child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text('Giacomo Cappon'),
-            accountEmail: Text('healthybit@gmail.com'),
-            currentAccountPicture: Image.asset('assets/cappon.png'),
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text('Giacomo Cappon'),
+                accountEmail: Text('healthybit@gmail.com'),
+                currentAccountPicture: Image.asset('assets/cappon.png'),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_box),
+                title: Text('To BMI Calculator'),
+                onTap: () => _toBMIPage(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Text('To Setting Page'),
+                onTap: () => _toSettingPage(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Food Diary'),
+                onTap: () => _toFoodDiary(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.fitbit),
+                title: Text('Activity Diary'),
+                onTap: () => _toActivityDiary(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.info_outline_rounded),
+                title: Text('Informations'),
+                onTap: () => _toInformationPage(context),
+              ),
+              ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('Log Out'),
+                  onTap: () => _toLoginPage(context)),
+            ],
           ),
-          ListTile(
-            title: Text('Food Diary'),
-            trailing: Icon(Icons.balance_outlined),
-            onTap: () {
-              Navigator.pushNamed(context, CaloriesPage.route);
-            },
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-            title: Text('Activity Diary'),
-            trailing: Icon(Icons.balance_outlined),
-            onTap: () {
-              Navigator.pushNamed(context, ActivityPage.route);
-            },
-          ),
-          ListTile(
-            title: Text('BMI calculator'),
-            trailing: Icon(Icons.calculate),
-            onTap: () {
-              Navigator.pushNamed(context, BMIPage.route);
-            },
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-            title: const Text('Informations'),
-            onTap: () {
-              Navigator.pushNamed(context, InformationsPage.route);
-            },
-            trailing: const Icon(Icons.info_outline_rounded),
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-            title: Text('Edit Profile'),
-            trailing: Icon(Icons.app_registration_outlined),
-            onTap: () {
-              Navigator.pushNamed(context, EditProfilePage.route);
-            },
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-            title: Text('Settings'),
-            trailing: Icon(Icons.settings),
-            onTap: () {
-              Navigator.pushNamed(context, SettingsPage.route);
-            },
-          ),
-          const Divider(thickness: 2),
-          const ListTile(
-            title: Text('FitnessActivity'),
-            trailing: Icon(Icons.fitness_center),
-          ),
-          const Divider(thickness: 2),
-          ListTile(
-              title: Text('Log Out'),
-              trailing: Icon(Icons.logout),
-              onTap: () => _toLoginPage(context)),
-          const Divider(thickness: 2),
-        ],
-      )),
-    );
-  } //build
+        ), //aggiumgere drawer con foto e logout in basso
+        //logout in basso: column-expanded-listTile-style: new ListTileTheme(selectedColor: Colors.grigiochiaro,),
+        endDrawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text('Dott.ssa Giò'),
+              accountEmail: Text('dottoressagio@gmail.com'),
+              currentAccountPicture: Image.asset('assets/dottoressa.jpg'),
+            ),
+          ]),
+        ),
+        //aggiungere endrawer con foto della nutrizionista e suoi dati e recapiti
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(children: [
+              Card(
+                  margin: EdgeInsets.all(20),
+                  child: Column(children: [
+                    InkWell(
+                      splashColor: Colors.blue.withAlpha(30),
+                      onTap: () {
+                        debugPrint('Card tapped.');
+                      },
+                      child: Column(children: [
+                        SizedBox(height: 20),
+                        ListTile(
+                          title: Center(child: Text('Reach your goal ! ')),
+                          subtitle: Center(
+                            child: Container(
+                              child: Text(
+                                  DateTime.now().day.toString() +
+                                      '-' +
+                                      DateTime.now().month.toString() +
+                                      '-' +
+                                      DateTime.now().year.toString(),
+                                  style: TextStyle(fontSize: 18)),
+                              margin: EdgeInsets.all(20),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Text('Today consume 1200 kcal'),
+                        ),
+                        SizedBox(height: 20),
+                      ]),
+                    ),
+                  ]))
+            ])));
+  }
+
+  void _toBMIPage(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then push the ProfilePage
+    Navigator.pushNamed(context, BMIPage.route);
+  } //_toProfilePage
+
+  void _toSettingPage(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then push the CalendarPage
+    Navigator.pushNamed(context, SettingsPage.route);
+  } //_toCalendarPage
+
+  void _toFoodDiary(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.pushNamed(context, CaloriesPage.route);
+  } //_toCalendarPage
+
+  void _toActivityDiary(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.pushNamed(context, FitnessActivityPage.route);
+  } //_toCalendarPage
+
+  void _toInformationPage(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.pushNamed(context, InformationsPage.route);
+  } //_toCalendarPage
 
   void _toLoginPage(BuildContext context) async {
     //Unset the 'username' filed in SharedPreference

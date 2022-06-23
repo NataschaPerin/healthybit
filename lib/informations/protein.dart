@@ -30,17 +30,13 @@ class _ProteinPageState extends State<ProteinPage> {
                 children: [
                   Row(
                     children: [
-                      _buildCard(1,
-                          'https://www.google.com/imgres?imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fegg-png-11553982163adxg943uq9.png&imgrefurl=https%3A%2F%2Ftoppng.com%2Ffree-image%2Fegg-png-PNG-free-PNG-Images_136924&tbnid=BUWcfevZJHRXlM&vet=12ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ..i&docid=3l3aYoQZ7mpvTM&w=840&h=859&q=egg%20images%20png&ved=2ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ'),
+                      _buildCard('assets/uovo.jpg'),
                       const SizedBox(width: 12),
-                      _buildCard(1,
-                          'https://www.google.com/imgres?imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fegg-png-11553982163adxg943uq9.png&imgrefurl=https%3A%2F%2Ftoppng.com%2Ffree-image%2Fegg-png-PNG-free-PNG-Images_136924&tbnid=BUWcfevZJHRXlM&vet=12ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ..i&docid=3l3aYoQZ7mpvTM&w=840&h=859&q=egg%20images%20png&ved=2ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ'),
+                      _buildCard('assets/carne.jpg'),
                       const SizedBox(width: 12),
-                      _buildCard(1,
-                          'https://www.google.com/imgres?imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fegg-png-11553982163adxg943uq9.png&imgrefurl=https%3A%2F%2Ftoppng.com%2Ffree-image%2Fegg-png-PNG-free-PNG-Images_136924&tbnid=BUWcfevZJHRXlM&vet=12ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ..i&docid=3l3aYoQZ7mpvTM&w=840&h=859&q=egg%20images%20png&ved=2ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ'),
+                      _buildCard('assets/pesce.jpg'),
                       const SizedBox(width: 12),
-                      _buildCard(1,
-                          'https://www.google.com/imgres?imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fegg-png-11553982163adxg943uq9.png&imgrefurl=https%3A%2F%2Ftoppng.com%2Ffree-image%2Fegg-png-PNG-free-PNG-Images_136924&tbnid=BUWcfevZJHRXlM&vet=12ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ..i&docid=3l3aYoQZ7mpvTM&w=840&h=859&q=egg%20images%20png&ved=2ahUKEwi12sy33774AhXKhP0HHWg-BcIQMygCegUIARDMAQ'),
+                      _buildCard('assets/piselli.jpg'),
                       const SizedBox(width: 12),
                     ],
                   ),
@@ -69,14 +65,15 @@ class _ProteinPageState extends State<ProteinPage> {
                           color: Colors.black,
                           offset: Offset(1, 3))
                     ]),
-                child: Text("My demo styling"),
+                child: Text(
+                    "Proteins are the building blocks of which living organisms are made: the amino acids of which they are composed make up both cells and the enzymes and hormones that regulate their functioning. Amino acids can be manufactured by the body; others, called 'essential', must be taken in with food. Proteins in foods of animal origin (red and white meat, fish, milk, etc.) are called 'animal proteins,' while those in plant foods especially legumes, including soybeans, and cereals) are called 'plant' proteins. Protein should account for 10-15% of the total caloric requirement equally divided between the two categories just mentioned. These building blocks are especially needed during growth: after the first year of life the amount varies from 1.5 to 2 grams of protein per day per kilogram of body weight. Caution: excessive protein intake can strain kidney function."),
               ),
             ),
           ]),
         ));
   }
 
-  Widget _buildCard(int index, String url) => Container(
+  Widget _buildCard(String url) => Container(
         height: 150,
         width: 150,
         decoration: BoxDecoration(
@@ -88,10 +85,9 @@ class _ProteinPageState extends State<ProteinPage> {
                   blurRadius: 10, color: Colors.black, offset: Offset(1, 3))
             ]),
         child: Material(
-            color: Colors.white,
-            child: Image(
-              image: NetworkImage(url),
-            )),
+          color: Colors.white,
+          child: Image.asset(url),
+        ),
       );
 
   Widget _buildTitle(String title, Color color) {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:healthybit/screens/fitnessactivity.dart';
+import 'package:healthybit/screens/progressPage.dart';
 import 'package:pretty_gauge/pretty_gauge.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:healthybit/database/entities/food.dart';
@@ -31,6 +33,9 @@ class ScorePage extends StatelessWidget {
       required this.weight,
       required this.height})
       : super(key: key);
+
+  static const route = '/ScorePage';
+  static const routeDisplayName = 'Score page';
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +114,10 @@ class ScorePage extends StatelessWidget {
                       ],
                     ),
                     FloatingActionButton(
-                      child: const Icon(Icons.save_alt),
-                      onPressed: () => _toResultsPage(context, null),
-                    ),
+                        child: const Icon(Icons.save_alt),
+                        onPressed: () => Navigator.pushNamed(context,
+                            ProgressPage.route) //_toResultsPage(context, null),
+                        ),
                   ]))),
     );
   }
@@ -139,5 +145,7 @@ class ScorePage extends StatelessWidget {
   void _toResultsPage(BuildContext context, Parameter? parameter) {
     Navigator.pushNamed(context, ResultsPage.route,
         arguments: {'parameter': Parameter});
+    //Navigator.of(context)
+    //.pushNamed(ResultsPage.route, arguments: {'parameter': Parameter});
   } //_toResultsPage
 }

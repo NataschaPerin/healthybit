@@ -39,6 +39,7 @@ dependencies:
   share_plus: ^4.0.8
   page_transition: ^2.0.7
   swipeable_button_view: ^0.0.2
+  animations: ^1.0.0+5
 
   #Essential dependencies
   provider: ^6.0.3
@@ -85,6 +86,30 @@ flutter:
     - assets/man.png
     - assets/woman.png
     - assets/cappon.png
+    - assets/acqua.jpg
+    - assets/arance.jpg
+    - assets/avena.jpg
+    - assets/avocado.jpg
+    - assets/banana.jpg
+    - assets/burro.jpg
+    - assets/carne.jpg
+    - assets/ceci.jpg
+    - assets/cereali.jpg
+    - assets/fagioli.jpg
+    - assets/mele.jpg
+    - assets/noci.jpg
+    - assets/olio.jpg
+    - assets/pane.jpg
+    - assets/pasta.jpg
+    - assets/patate.jpg
+    - assets/pesce.jpg
+    - assets/piselli.jpg
+    - assets/spinaci.jpg
+    - assets/uovo.jpg
+    - assets/back.png
+    - assets/biceps.png
+    - assets/chest.png
+    - assets/dottoressa.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

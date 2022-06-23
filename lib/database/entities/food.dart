@@ -56,4 +56,4 @@ class Parameter {
   //Default constructor
   Parameter(
       this.personalId, this.personWeight, this.Height, this.BMI, this.date);
-}//Meal
+}//Parameter

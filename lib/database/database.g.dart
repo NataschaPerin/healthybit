@@ -86,7 +86,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Food` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `weight` REAL NOT NULL, `carbohydrates` REAL NOT NULL, `proteins` REAL NOT NULL, `lipids` REAL NOT NULL, `calories` REAL NOT NULL, `dateTime` INTEGER NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Parameter` (`personalId` INTEGER PRIMARY KEY AUTOINCREMENT, `personWeight` REAL NOT NULL, `Height` REAL NOT NULL, `BMI` REAL NOT NULL, `date` REAL NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `Parameter` (`personalId` INTEGER PRIMARY KEY AUTOINCREMENT, `personWeight` INTEGER NOT NULL, `Height` INTEGER NOT NULL, `BMI` REAL NOT NULL, `date` INTEGER NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -203,7 +203,7 @@ class _$ParameterDao extends ParameterDao {
                   'personWeight': item.personWeight,
                   'Height': item.Height,
                   'BMI': item.BMI,
-                  'date': item.date
+                  'date': _dateTimeConverter.encode(item.date)
                 }),
         _parameterUpdateAdapter = UpdateAdapter(
             database,
@@ -214,7 +214,18 @@ class _$ParameterDao extends ParameterDao {
                   'personWeight': item.personWeight,
                   'Height': item.Height,
                   'BMI': item.BMI,
-                  'date': item.date
+                  'date': _dateTimeConverter.encode(item.date)
+                }),
+        _parameterDeletionAdapter = DeletionAdapter(
+            database,
+            'Parameter',
+            ['personalId'],
+            (Parameter item) => <String, Object?>{
+                  'personalId': item.personalId,
+                  'personWeight': item.personWeight,
+                  'Height': item.Height,
+                  'BMI': item.BMI,
+                  'date': _dateTimeConverter.encode(item.date)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -227,18 +238,17 @@ class _$ParameterDao extends ParameterDao {
 
   final UpdateAdapter<Parameter> _parameterUpdateAdapter;
 
+  final DeletionAdapter<Parameter> _parameterDeletionAdapter;
+
   @override
-  Future<List<Food>> findAllParameters() async {
+  Future<List<Parameter>> findAllParameters() async {
     return _queryAdapter.queryList('SELECT * FROM Parameter',
-        mapper: (Map<String, Object?> row) => Food(
-            row['id'] as int?,
-            row['name'] as String,
-            row['weight'] as double,
-            row['carbohydrates'] as double,
-            row['proteins'] as double,
-            row['lipids'] as double,
-            row['calories'] as double,
-            _dateTimeConverter.decode(row['dateTime'] as int)));
+        mapper: (Map<String, Object?> row) => Parameter(
+            row['personalId'] as int?,
+            row['personWeight'] as int,
+            row['Height'] as int,
+            row['BMI'] as double,
+            _dateTimeConverter.decode(row['date'] as int)));
   }
 
   @override
@@ -250,6 +260,11 @@ class _$ParameterDao extends ParameterDao {
   @override
   Future<void> updateParameter(Parameter parameter) async {
     await _parameterUpdateAdapter.update(parameter, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> deleteParameter(Parameter parameter) async {
+    await _parameterDeletionAdapter.delete(parameter);
   }
 }
 

@@ -1,7 +1,12 @@
 // pagina fatta tipo griglia dove sono contenute tutte le info utili per l'utente
 //
 import 'package:flutter/material.dart';
+import 'package:healthybit/informations/carbohydrates.dart';
+import 'package:healthybit/informations/fiber.dart';
+import 'package:healthybit/informations/lipid.dart';
 import 'package:healthybit/informations/protein.dart';
+import 'package:healthybit/informations/vitaminsminerals.dart';
+import 'package:healthybit/informations/waterconsumption.dart';
 
 class InformationsPage extends StatelessWidget {
   const InformationsPage({Key? key}) : super(key: key);
@@ -38,30 +43,62 @@ class InformationsPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[200],
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text('Carbohydrates'),
-            ),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, CarbohydratesPage.route);
+                  },
+                  title: Text('Carbohydrates'),
+                )),
           ),
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[300],
-            child: const Text('Lipids'),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, LipidPage.route);
+                  },
+                  title: Text('Lipids'),
+                )),
           ),
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[400],
-            child: const Text('Vitamins and Minerals'),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, VMPage.route);
+                  },
+                  title: Text('Vitamins and Minerals'),
+                )),
           ),
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[500],
-            child: const Text('Water Consumption'),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, WaterPage.route);
+                  },
+                  title: Text('Water Consumption'),
+                )),
           ),
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.teal[600],
-            child: const Text('Physical Activity'),
+            child: Align(
+                alignment: Alignment.center,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, FiberPage.route);
+                  },
+                  title: Text('Fiber'),
+                )),
           ),
         ],
       ),

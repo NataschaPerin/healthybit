@@ -6,7 +6,6 @@ import 'package:healthybit/informations/lipid.dart';
 import 'package:healthybit/informations/protein.dart';
 import 'package:healthybit/informations/vitaminsminerals.dart';
 import 'package:healthybit/informations/waterconsumption.dart';
-import 'package:healthybit/screens/ActivityPage.dart';
 import 'package:healthybit/screens/BMIPage.dart';
 import 'package:healthybit/screens/Informations.dart';
 import 'package:healthybit/screens/Login.dart';
@@ -14,6 +13,7 @@ import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/Results.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/fitibit.dart';
+import 'package:healthybit/screens/fitnessactivity.dart';
 import 'package:healthybit/screens/homepage.dart';
 import 'package:healthybit/screens/scorepage.dart';
 import 'package:healthybit/screens/settings.dart';
@@ -22,6 +22,7 @@ import 'package:healthybit/database/database.dart';
 import 'package:healthybit/repositories/databaseRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:healthybit/database/entities/food.dart';
+import 'package:healthybit/screens/progressPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,13 +57,14 @@ class MyApp extends StatelessWidget {
           ProteinPage.route: (context) => ProteinPage(),
           FiberPage.route: (context) => FiberPage(),
           LipidPage.route: (context) => LipidPage(),
-          VitaminsMineralsPage.route: (context) => VitaminsMineralsPage(),
-          WaterConsumptionPage.route: (context) => WaterConsumptionPage(),
+          VMPage.route: (context) => VMPage(),
+          WaterPage.route: (context) => WaterPage(),
           EditProfilePage.route: (context) => EditProfilePage(),
           SettingsPage.route: (context) => SettingsPage(),
-          ActivityPage.route: (context) => ActivityPage(),
           BMIPage.route: (context) => BMIPage(),
-          Fitbit.route: (context) => Fitbit()
+          Fitbit.route: (context) => Fitbit(),
+          FitnessActivityPage.route: (context) => FitnessActivityPage(),
+          ProgressPage.route: (context) => ProgressPage()
         },
         onGenerateRoute: (settings) {
           if (settings.name == CaloriesPage.route) {

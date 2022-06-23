@@ -26,7 +26,7 @@ abstract class FoodDao {
 abstract class ParameterDao {
   //Query #1: SELECT -> this allows to obtain all the entries of the Food table
   @Query('SELECT * FROM Parameter')
-  Future<List<Food>> findAllParameters();
+  Future<List<Parameter>> findAllParameters();
 
   //Query #2: INSERT -> this allows to add a Parameter in the table
   @insert
@@ -35,4 +35,8 @@ abstract class ParameterDao {
   //Query #3: UPDATE -> this allows to update a Parameter entry
   @Update(onConflict: OnConflictStrategy.replace)
   Future<void> updateParameter(Parameter parameter);
+
+  //Query #3: DELETE -> this allows to delete a Food from the table
+  @delete
+  Future<void> deleteParameter(Parameter parameter);
 }//ParameterDao
