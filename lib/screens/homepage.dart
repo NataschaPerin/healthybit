@@ -12,6 +12,7 @@ import 'package:healthybit/screens/Login.dart';
 import 'package:healthybit/screens/MetabolicPage.dart';
 import 'package:healthybit/screens/editProfile.dart';
 import 'package:healthybit/screens/home.dart';
+import 'package:healthybit/screens/progressPage.dart';
 import 'package:healthybit/screens/reachyourgoal.dart';
 import 'package:healthybit/screens/settings.dart';
 import 'package:healthybit/screens/fitnessactivity.dart';
@@ -60,24 +61,29 @@ class _HomePageState extends State<HomePage> {
               currentAccountPictureSize: Size.square(100),
             ),
             ListTile(
-              leading: Icon(Icons.account_box),
+              leading: Icon(Icons.calculate),
               title: Text('BMI Calculator'),
               onTap: () => _toBMIPage(context),
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(Icons.food_bank),
               title: Text('Food Diary'),
               onTap: () => _toFoodDiary(context),
             ),
             ListTile(
-              leading: Icon(Icons.fitbit),
+              leading: Icon(Icons.fitness_center_outlined),
               title: Text('Activity Diary'),
               onTap: () => _toActivityDiary(context),
             ),
             ListTile(
-              leading: Icon(Icons.emoji_objects),
+              leading: Icon(Icons.star_border),
               title: Text('Goals'),
               onTap: () => _toReachYourGoal(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.priority_high),
+              title: Text('Progress'),
+              onTap: () => _toProgressPage(context),
             ),
             ListTile(
               leading: Icon(Icons.info_outline_rounded),
@@ -117,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text('Giorgia'),
                     SizedBox(width: 50),
-                    Text('Durso')
+                    Text('D\'Urso')
                   ],
                 ),
               ),
@@ -235,6 +241,14 @@ class _HomePageState extends State<HomePage> {
     Navigator.pop(context);
     //Then pop the HomePage
     Navigator.pushNamed(context, ReachyourgoalPage.route);
+  }
+
+  //_toProgressPage
+  void _toProgressPage(BuildContext context) {
+    //Pop the drawer first
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.pushNamed(context, ProgressPage.route);
   }
 
   //_toCalendarPage

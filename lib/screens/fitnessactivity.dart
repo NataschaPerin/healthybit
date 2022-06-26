@@ -57,7 +57,7 @@ class FitnessActivityPage extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "Upper Body",
+                  "Total Body",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 24,
