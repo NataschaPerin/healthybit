@@ -23,13 +23,13 @@ class ProgressPage extends StatelessWidget {
         title: const Text(ProgressPage.routename),
       ),
       body: Center(child:
-          //We will show the todo table with a ListView.
+          //We will show the parameters table with a ListView.
           //To do so, we use a Consumer of DatabaseRepository in order to rebuild the widget tree when
           //entries are deleted or created.
           Consumer<DatabaseRepository>(builder: (context, dbr, child) {
-        //The logic is to query the DB for the entire list of Todo using dbr.findAllTodos()
+        //The logic is to query the DB for the entire list of Parameters using dbr.findAllParameters()
         //and then populate the ListView accordingly.
-        //We need to use a FutureBuilder since the result of dbr.findAllTodos() is a Future.
+        //We need to use a FutureBuilder since the result of dbr.findAllParameters() is a Future.
         return FutureBuilder(
           initialData: null,
           future: dbr.findAllParameters(),
@@ -41,19 +41,28 @@ class ProgressPage extends StatelessWidget {
                   itemBuilder: (context, todoIndex) {
                     final todo = data[todoIndex];
                     return Card(
-                        elevation: 5,
+                        elevation: 10,
+                        color: Color.fromARGB(255, 234, 101, 29),
                         //Here we use a Dismissible widget to create a nicer UI.
                         child: Dismissible(
                             //Just create a dummy unique key
                             key: UniqueKey(),
                             //This is the background to show when the ListTile is swiped
                             background: Container(color: Colors.red),
-                            //The ListTile is used to show the Todo entry
+                            //The ListTile is used to show the Parameter entry
                             child: ListTile(
-                              leading: Icon(MdiIcons.note),
-                              title: Text('BMI: ${data[todoIndex].BMI}'),
+                              leading: Icon(MdiIcons.scaleBalance),
+                              title: Text('BMI: ${data[todoIndex].BMI}',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 20)),
                               subtitle: Text(
-                                  '${Formats.fullDateFormatNoSeconds.format(data[todoIndex].date)}'),
+                                  '${Formats.fullDateFormatNoSeconds.format(data[todoIndex].date)}',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
+                                      fontSize: 15)),
                               //If the ListTile is tapped, it is deleted
                             ),
                             onDismissed: (direction) async {
@@ -64,7 +73,7 @@ class ProgressPage extends StatelessWidget {
                             }));
                   });
             } else {
-              //A CircularProgressIndicator is shown while the list of Todo is loading.
+              //A CircularProgressIndicator is shown while the list of Parameters is loading.
               return CircularProgressIndicator();
             } //else
           }, //builder of FutureBuilder

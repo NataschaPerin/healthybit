@@ -14,8 +14,6 @@ class CaloriesPage extends StatelessWidget {
   static const route = '/CaloriesPage';
   static const routeDisplayName = 'Caloriespage';
 
-  //double todaycalories = 0;
-
   @override
   Widget build(BuildContext context) {
     //Print the route display name for debugging
@@ -26,20 +24,20 @@ class CaloriesPage extends StatelessWidget {
           title: Text(CaloriesPage.routeDisplayName),
         ),
         body: Center(
-          //We will show the Meal table with a ListView.
+          //We will show the Food table with a ListView.
           //To do so, we use a Consumer of DatabaseRepository in order to rebuild the widget tree when
           //entries are deleted, created or updated.
           child: Consumer<DatabaseRepository>(builder: (context, dbr, child) {
-            //The logic is to query the DB for the entire list of Meal using dbr.findAllMeals()
+            //The logic is to query the DB for the entire list of Foods using dbr.findAllFoodss()
             //and then populate the ListView accordingly.
-            //We need to use a FutureBuilder since the result of dbr.findAllMeals() is a Future.
+            //We need to use a FutureBuilder since the result of dbr.findAllFoods() is a Future.
             return FutureBuilder(
               initialData: null,
               future: dbr.findAllFoods(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final data = snapshot.data as List<Food>;
-                  //If the Meal table is empty, show a simple Text, otherwise show the list of meals using a ListView.
+                  //If the Food table is empty, show a simple Text, otherwise show the list of foods using a ListView.
                   return data.length == 0
                       ? Text('The food list is currently empty')
                       : ListView.builder(
@@ -58,7 +56,7 @@ class CaloriesPage extends StatelessWidget {
                                     'CALORIES : ${data[foodIndex].calories}'),
                                 subtitle: Text(
                                     '${Formats.fullDateFormatNoSeconds.format(data[foodIndex].dateTime)}'),
-                                //When a ListTile is tapped, the user is redirected to the MealPage, where it will be able to edit it.
+                                //When a ListTile is tapped, the user is redirected to the FoodPage, where it will be able to edit it.
                                 onTap: () =>
                                     _toMetabolicPage(context, data[foodIndex]),
                               ),
@@ -73,8 +71,8 @@ class CaloriesPage extends StatelessWidget {
           } //Consumer-builder
               ),
         ),
-        //Here, I'm using a FAB to let the user add new meals.
-        //Rationale: I'm using null as meal to let MealPage know that we want to add a new meal.
+        //Here, I'm using a FAB to let the user add new foods.
+        //Rationale: I'm using null as food to let FoodPage know that we want to add a new food.
         floatingActionButton: FloatingActionButton(
           child: Icon(MdiIcons.plus),
           onPressed: () => _toMetabolicPage(context, null),

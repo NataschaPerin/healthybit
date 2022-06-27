@@ -1,7 +1,3 @@
-// pagina dove verrano indicate le calore consumate (ricavate dai dati Fitbit)
-// e quelle necessarie (formula da trovare), rimanda poi alla pagina dove si
-//inseriscono le calore assunte tramite cibo
-
 import 'package:flutter/material.dart';
 import 'package:healthybit/screens/Calories.dart';
 import 'package:healthybit/screens/Informations.dart';
@@ -19,11 +15,11 @@ import 'package:healthybit/widgets/formSeparator.dart';
 import 'package:healthybit/utils/formats.dart';
 import 'package:provider/provider.dart';
 
-//This is the class that implement the page to be used to edit existing meals and add new meals.
+//This is the class that implement the page to be used to edit existing foods and add new foods.
 //This is a StatefulWidget since it needs to rebuild when the form fields change.
 class MetabolicPage extends StatefulWidget {
-  //We are passing the Meal to be edited. If it is null, the business logic will know that we are adding a new
-  //Meal instead.
+  //We are passing the Food to be edited. If it is null, the business logic will know that we are adding a new
+  //Food instead.
   final Food? food;
 
   //MealPage constructor
@@ -36,7 +32,7 @@ class MetabolicPage extends StatefulWidget {
   State<MetabolicPage> createState() => _MetabolicPageState();
 } //MealPage
 
-//Class that manages the state of MealPage
+//Class that manages the state of FoodPage
 class _MetabolicPageState extends State<MetabolicPage> {
   //Form globalkey: this is required to validate the form fields.
   final formKey = GlobalKey<FormState>();
@@ -51,7 +47,7 @@ class _MetabolicPageState extends State<MetabolicPage> {
   DateTime _selectedDate = DateTime.now();
 
   //Here, we are using initState() to initialize the form fields values.
-  //Rationale: Meal content and time are not known is the meal is new (meal == null).
+  //Rationale: Food content and time are not known is the food is new (food == null).
   // In this case, initilize them to empty and now(), respectively, otherwise set them to the respective values.
   @override
   void initState() {
@@ -89,7 +85,7 @@ class _MetabolicPageState extends State<MetabolicPage> {
     print('${MetabolicPage.routeDisplayName} built');
 
     //The page is composed of a form. An action in the AppBar is used to validate and save the information provided by the user.
-    //A FAB is showed to provide the "delete" functinality. It is showed only if the meal already exists.
+    //A FAB is showed to provide the "delete" functinality. It is showed only if the food already exists.
     return Scaffold(
       appBar: AppBar(
         title: Text(MetabolicPage.routeDisplayName),
@@ -141,7 +137,7 @@ class _MetabolicPageState extends State<MetabolicPage> {
             FormNumberTile(
               labelText: 'Proteins',
               controller: _proteinsController,
-              icon: MdiIcons.foodDrumstickOffOutline,
+              icon: MdiIcons.fish,
             ),
             FormSeparator(label: 'Lipids'),
             FormNumberTile(
@@ -199,10 +195,10 @@ class _MetabolicPageState extends State<MetabolicPage> {
       });
   } //_selectDate
 
-  //Utility method that validate the form and, if it is valid, save the new meal information.
+  //Utility method that validate the form and, if it is valid, save the new food information.
   void _validateAndSave(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      //If the original Meal passed to the MealPage was null, then add a new Meal...
+      //If the original Food passed to the FoodPage was null, then add a new Food...
       if (widget.food == null) {
         Food newFood = Food(
             null,
@@ -234,7 +230,7 @@ class _MetabolicPageState extends State<MetabolicPage> {
     } //if
   } // _validateAndSave
 
-  //Utility method that deletes a meal entry.
+  //Utility method that deletes a food entry.
   void _deleteAndPop(BuildContext context) async {
     await Provider.of<DatabaseRepository>(context, listen: false)
         .removeFood(widget.food!);

@@ -30,7 +30,9 @@ class Home extends StatelessWidget {
             child: Column(children: [
               SizedBox(height: 20),
               CircleAvatar(
-                  radius: 65, backgroundImage: AssetImage('assets/logo.png')),
+                  backgroundColor: Colors.white,
+                  radius: 65,
+                  backgroundImage: AssetImage('assets/logo.png')),
               Card(
                   margin: EdgeInsets.all(20),
                   child: Column(children: [

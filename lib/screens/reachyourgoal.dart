@@ -24,6 +24,8 @@ class ReachyourgoalPage extends StatefulWidget {
 }
 
 class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
+  double intake = 0;
+  double outtake = 0;
   @override
   Widget build(BuildContext context) {
     //Print the route display name for debugging
@@ -39,24 +41,32 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
         Consumer<DatabaseRepository>(builder: (context, dbr, child) {
           //The logic is to query the DB for the entire list of Meal using dbr.findAllMeals()
           //and then populate the ListView accordingly.
-          //We need to use a FutureBuilder since the result of dbr.findAllMeals() is a Future.
+          //We need to use a FutureBuilder since the result of dbr.findAllFoods() is a Future.
           return FutureBuilder(
               initialData: null,
               future: dbr.findAllFoods(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final data = snapshot.data as List<Food>;
-                  //If the Meal table is empty, show a simple Text, otherwise show the list of meals using a ListView.
+                  //If the Food table is empty, show a simple Text, otherwise show the list of foods using a ListView.
                   if (data.length == 0) {
                     return Text('Start eat!');
                   } else {
                     List<double> calories_in = _toSelect(context, data);
+                    intake = _toIntake(context, calories_in);
                     return Card(
-                      elevation: 5,
+                      elevation: 10,
+                      color: Color.fromARGB(255, 241, 30, 15),
                       child: ListTile(
                         leading: Icon(MdiIcons.foodForkDrink),
-                        title: Text('CALORIES INTAKE:'),
-                        subtitle: Text(_toCalculate(context, calories_in)),
+                        title: Text('CALORIES INTAKE:',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 20)),
+                        subtitle: Text(_toCalculate(context, calories_in),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 20)),
                       ), //ListTile
                     ); //Card
                   } //else
@@ -73,16 +83,48 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final calories_out = snapshot.data as String;
+                outtake = double.parse(calories_out);
                 return Card(
-                    elevation: 5,
+                    elevation: 10,
+                    color: Color.fromARGB(255, 20, 247, 28),
                     child: ListTile(
                         leading: Icon(MdiIcons.fire),
-                        title: Text('CALORIES OUTTAKE:'),
-                        subtitle: Text(calories_out + '  kcal')));
+                        title: Text('CALORIES OUTTAKE:',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 20)),
+                        subtitle: Text(calories_out + '  kcal',
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 20))));
               } else {
                 return Text('Control your fitbit authorization');
               }
             }),
+        FutureBuilder(
+            initialData: null,
+            future: _toConsume(context),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final calories_out = snapshot.data as String;
+                outtake = double.parse(calories_out);
+                return Card(
+                    elevation: 10,
+                    color: Color.fromARGB(255, 54, 215, 243),
+                    child: ListTile(
+                        leading: Icon(MdiIcons.pacMan),
+                        title: Text(_toComparation(context, intake, outtake),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 20)),
+                        subtitle: Text('',
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 20))));
+              } else {
+                return Text('Control your fitbit authorization');
+              }
+            })
       ],
     ) //Center
             ));
@@ -104,6 +146,14 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
     return sum.toString() + '  kcal';
   }
 
+  double _toIntake(BuildContext context, List<double> calories_in) {
+    double sum = 0;
+    for (var i = 0; i < calories_in.length; i++) {
+      sum += calories_in[i];
+    }
+    return sum;
+  }
+
   Future<String> _toConsume(BuildContext context) async {
     //Instantiate a proper data manager
     FitbitActivityTimeseriesDataManager fitbitActivityTimeseriesDataManager =
@@ -122,15 +172,14 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
     return caloriesData[0].value.toString();
   }
 
-  String _toComparation(BuildContext context, sum, calories_out) {
-    double cal_out = double.parse(calories_out);
+  String _toComparation(BuildContext context, cal_in, cal_out) {
     String str = '';
-    if (sum > cal_out) {
-      String str = 'You are in surplus by ${sum - cal_out}!';
-    } else if (sum == cal_out) {
-      String str = 'You are in perfect balance!';
+    if (cal_in > cal_out) {
+      str = 'You are in surplus by ${cal_in - cal_out}!';
+    } else if (cal_in == cal_out) {
+      str = 'You are in perfect balance!';
     } else {
-      String str = 'You are in deficit by ${cal_out - sum}!';
+      str = 'You are in deficit by ${cal_out - cal_in}!';
     }
     return str;
   }
