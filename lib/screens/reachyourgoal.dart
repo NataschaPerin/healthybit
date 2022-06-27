@@ -122,7 +122,7 @@ class _ReachyourgoalPageState extends State<ReachyourgoalPage> {
                             style: const TextStyle(
                                 color: Colors.black, fontSize: 20))));
               } else {
-                return Text('Control your fitbit authorization');
+                return Text('Loading...');
               }
             })
       ],
